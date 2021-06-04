@@ -1,0 +1,12 @@
+{
+  "name": "typescript_react_crx",
+  "version": "1.0.0",
+  "description": "用ts开发react项目，从0搭建开发环境，集成eslint、jest单元测试、react全家桶、中间件、dva、antdesign-pro，视频179-181",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
