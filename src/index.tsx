@@ -1,19 +1,23 @@
-import React, { FunctionComponentElement } from "react";
+import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 
 interface Props {
   className: string;
 }
+interface State {
+  id: string;
+}
 let props: Props = { className: "title" /* age: 1 */ };
 
-function Hello(props: Props) {
-  return React.createElement<Props, HTMLHeadingElement>("h1", props, "hello");
+class Hello extends React.Component<Props, State> {
+  state = {
+    id: "cherish",
+  };
+  render() {
+    return React.createElement("h1", props, "hello");
+  }
 }
-let element: FunctionComponentElement<Props> = React.createElement<Props>(
-  Hello,
-  props,
-  "hello"
-);
+let element: ReactElement<Props> = React.createElement<Props>(Hello, props);
 
 ReactDOM.render(element, document.querySelector("#root"));
 

@@ -33,3 +33,11 @@ declare function createElement<P extends {}>(
 interface FunctionComponent<P = {}> {
   (props: P): ReactElement | null;
 }
+interface ComponentClass<P = {}> {
+  (props: P): ReactElement | null;
+}
+declare function createElement<P extends {}>(
+  type: FunctionComponent<P> | ComponentClass<P> | string,
+  props?: P | null,
+  ...children: ReactNode[]
+): ReactElement<P>;
