@@ -14,7 +14,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(j,t)sx?$/,
+        test: /\.(j|t)sx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
       },
@@ -23,6 +23,7 @@ module.exports = {
 
   devServer: {
     contentBase: "../dist",
+    port:8000
   },
   plugins: [
     new CleanWebpackPlugin({
