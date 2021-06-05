@@ -1,12 +1,19 @@
-import React, { DetailedReactHTMLElement } from "react";
+import React, { FunctionComponentElement } from "react";
 import ReactDOM from "react-dom";
 
 interface Props {
   className: string;
 }
 let props: Props = { className: "title" /* age: 1 */ };
-let element: DetailedReactHTMLElement<Props, HTMLHeadingElement> =
-  React.createElement<Props, HTMLHeadingElement>("h1", props, "hello");
+
+function Hello(props: Props) {
+  return React.createElement<Props, HTMLHeadingElement>("h1", props, "hello");
+}
+let element: FunctionComponentElement<Props> = React.createElement<Props>(
+  Hello,
+  props,
+  "hello"
+);
 
 ReactDOM.render(element, document.querySelector("#root"));
 

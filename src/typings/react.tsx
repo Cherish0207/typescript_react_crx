@@ -21,3 +21,15 @@ declare function createElement<P, T extends Element>(
   props?: P | null,
   ...children: ReactNode[]
 ): DetailedReactHTMLElement<P, T>;
+
+interface FunctionComponentElement<P> extends ReactElement {}
+
+declare function createElement<P extends {}>(
+  type: FunctionComponent<P>,
+  props?: P | null,
+  ...children: ReactNode[]
+): FunctionComponentElement<P>;
+
+interface FunctionComponent<P = {}> {
+  (props: P): ReactElement | null;
+}
