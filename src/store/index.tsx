@@ -9,7 +9,12 @@ import {
 import thunk from "redux-thunk";
 import reducer from "./reducers";
 import { CombinedState } from "./reducers";
-const storeEnhancer: StoreEnhancer = applyMiddleware(thunk);
+import { routerMiddleware } from "connected-react-router";
+import history from "../history";
+const storeEnhancer: StoreEnhancer = applyMiddleware(
+  thunk,
+  routerMiddleware(history)
+);
 const storeEnhancerStoreCreator: StoreEnhancerStoreCreator =
   storeEnhancer(createStore);
 const store: Store<CombinedState, AnyAction> =
