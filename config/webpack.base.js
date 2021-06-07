@@ -18,12 +18,16 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.css/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
 
   devServer: {
     contentBase: "../dist",
-    port:8000
+    port: 8000,
   },
   plugins: [
     new CleanWebpackPlugin({
