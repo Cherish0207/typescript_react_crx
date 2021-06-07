@@ -9,7 +9,9 @@ let columns = [
     title: "ID",
     dataIndex: "_id",
     key: "_id",
-    render() {},
+    render(val: string, record: User) {
+      return <Link to={`/user/detail/${record._id}`}>{record.username}</Link>;
+    },
   },
   {
     title: "用户名",
@@ -44,13 +46,11 @@ function UserList() {
     })();
   }, []);
   return (
-    <ul>
-      {users.map((user: User) => (
-        <li key={user._id}>
-          <Link to={`/user/detail/${user._id}`}>{user.username}</Link>
-        </li>
-      ))}
-    </ul>
+    <Table
+      columns={columns}
+      dataSource={users}
+      rowKey={(row: User) => row._id}
+    ></Table>
   );
 }
 export default UserList;
