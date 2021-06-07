@@ -1,7 +1,8 @@
-import React, { Component, useState } from "react";
-import { Layout, Menu, Table } from "antd";
+import React, { Component, useState, useEffect } from "react";
+import { Layout, Menu, Table, message } from "antd";
 import { Link, withRouter, RouteComponentProps, Route } from "react-router-dom";
-import { User } from "../typings/api";
+import { User, UserListResponse } from "../typings/api";
+import request, { AxiosResponse } from "../api/request";
 type Props = RouteComponentProps;
 let columns = [
   {
@@ -12,6 +13,20 @@ let columns = [
 ];
 function UserList() {
   let [users, setUsers] = useState<Array<User>>([]);
+  useEffect(() => {
+    (async () => {
+      let response: AxiosResponse<UserListResponse> = await request.get<
+        UserListResponse,
+        AxiosResponse<UserListResponse>
+      >("/api/users");
+      let { data, code } = response.data;
+      if (code === 0) {
+        setUsers(data);
+      } else {
+        message.error("获取用户列表失败");
+      }
+    })();
+  }, []);
   return (
     <Table
       columns={columns}
