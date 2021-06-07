@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import Counter1 from "./components/Counter1";
 import Counter2 from "./components/Counter2";
+import User from "./components/User";
 import store from "./store";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
@@ -18,9 +19,10 @@ ReactDOM.render(
           <Switch>
             <Route exact={true} path='/counter1' component={Counter1} />
             <Route exact={true} path='/counter2' component={Counter2} />
+            <Route path='/user' component={User} />
             <Redirect to='/counter1' />
           </Switch>
-        </Content>
+        </Content> 
       </BrowserRouter>
     </Layout>
   </Provider>,
