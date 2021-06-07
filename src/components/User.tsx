@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd";
 import { Link, withRouter, RouteComponentProps, Route } from "react-router-dom";
 import UserAdd from "./UserAdd";
 import UserList from "./UserList";
+import UserDetail from "./UserDetail";
 type Props = RouteComponentProps;
 let { Sider, Content } = Layout;
 class User extends Component<Props> {
@@ -26,6 +27,7 @@ class User extends Component<Props> {
         <Content style={{ padding: "20px" }}>
           <Route path='/user/add' component={UserAdd}></Route>
           <Route path='/user/list' component={UserList}></Route>
+          <Route path='/user/detail/:id' component={UserDetail}></Route>
         </Content>
       </Layout>
     );
