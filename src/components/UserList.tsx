@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, message } from "antd";
+import { Table, message, Button } from "antd";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { User, UserListResponse } from "../typings/api";
 import request, { AxiosResponse } from "../api/request";
@@ -34,14 +34,16 @@ let columns = [
   },
 ];
 function UserList(props: Props) {
+  let limit = 5;
+  let [offset, setOffset] = useState(0);
   let [users, setUsers] = useState<Array<User>>(props.list);
   useEffect(() => {
-    if (users.length === 0) {
+    if (users.length === 0||offset===0) {
       (async () => {
         let response: AxiosResponse<UserListResponse> = await request.get<
           UserListResponse,
           AxiosResponse<UserListResponse>
-        >("/api/users");
+        >(`/api/users?limit=${limit}&offset=${offset}`);
         let { data, code } = response.data;
         if (code === 0) {
           props.storeUsers(data);
@@ -60,13 +62,19 @@ function UserList(props: Props) {
         // ]);
       })();
     }
-  }, []);
+  }, [offset]);
+  const refresh = () => {
+    setOffset(0)
+  };
   return (
-    <Table
-      columns={columns}
-      dataSource={users}
-      rowKey={(row: User) => row._id}
-    ></Table>
+    <>
+      <Button onClick={refresh}>刷新</Button>
+      <Table
+        columns={columns}
+        dataSource={users}
+        rowKey={(row: User) => row._id}
+      ></Table>
+    </>
   );
 }
 
